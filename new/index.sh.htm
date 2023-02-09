@@ -1,0 +1,194 @@
+#!/bin/bash
+
+#Translation
+#export TEXTDOMAINDIR="/usr/share/locale"
+#export TEXTDOMAIN=biglinux-session-and-themes
+
+# Don't group windows
+xprop -id "$(xprop -root '\t$0' _NET_ACTIVE_WINDOW | cut -f 2)" -f WM_CLASS 8s -set WM_CLASS "$$"
+
+Activate=$"Ativar"
+Disable=$"Desativar"
+
+Service=$"Serviço:"
+NumLock_text=$"Ativar o NumLock ao ligar o sistema"
+
+###
+windowsBarTitle=$"Titulo Janela"
+Title=$"Titulo"
+subTitleText=$"Sub Titulo da janela"
+section=$"Sessão"
+help_Text=$"Texto esplicativo"
+Need_Help=$"Precisa de ajuda?"
+CLOSE=$"Fechar"
+OPEN=$"Abrir"
+Ativado_text=$"Ativado"
+Desativado_text=$"Desativado"
+###
+
+INPUT=$(grep Numlock=on /etc/sddm.conf)
+if [ -n "$(grep Numlock=on /etc/sddm.conf)" ]; then
+    checked_confnumlock="checked"
+fi
+
+cat << EOF
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel='stylesheet'><link rel="stylesheet" href="./style.css">
+</head>
+EOF
+
+# Get body tag with color light or not
+/usr/share/bigbashview/bcc/shell/getbgcolor.sh
+
+cat << EOF
+<body>
+<div class="dark-light">
+  <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+  </svg>
+</div>
+<div class="principal">
+  <div class="wrap">
+    <div class="user">
+      <div id="toggle-wrap">
+        <div id="toggle-terms">
+          <div id="cross">
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+
+  <div class="logo">
+    <a href="#"><img src="logo.svg" alt="" class="logo-biglinux"></a>
+  </div>
+
+  <div class="user">
+    <div class="form-wrap">
+      <div id="list-tab-content" class="fc-card active">
+        <div id="desc">
+            <h2>$Title</h2>
+        </div>
+      </div>
+      <div id="list-tab-content" class="fc-card active">
+        <div class="centretext">
+          <div id="desc">
+            <h3>$subTitleText</h3>
+          </div>
+        </div>
+      </div>
+    
+      <div id="desc">
+        <ul id="menu">
+          <li>
+      </div>
+          </li>
+        </ul>
+    </div><br>
+    <div class="content-section" style="margin-top: 0px;">    
+      <div class="content-section-title">$Service</div>
+    <ul style="margin-top: 0px;">
+      <li>
+EOF
+
+if [ -n "$(grep Numlock=on /etc/sddm.conf)" ]; then
+
+cat << EOF
+                  <div class="products">
+                  <svg viewBox="0 0 576 512"><path id="iconNumLock_text" fill="currentColor" d="m 176.19921,47.475585 c -36.58489,0 -66.03905,29.452207 -66.03905,66.037115 v 284.97266 c 0,36.5849 29.45416,66.03906 66.03905,66.03906 h 223.60158 c 36.58489,0 66.03905,-29.45416 66.03905,-66.03906 V 113.5127 c 0,-36.584908 -29.45416,-66.037115 -66.03905,-66.037115 z M 182,94.946288 h 40 c 6.59998,0 12,5.400012 12,12.000002 v 40 c 0,6.6 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.4 -12,-12 v -40 c 0,-6.59999 5.38001,-12.000002 12,-12.000002 z m 86,0 h 40 c 6.59998,0 12,5.400012 12,12.000002 v 40 c 0,6.6 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.4 -12,-12 v -40 c 0,-6.59999 5.38001,-12.000002 12,-12.000002 z m 86,0 h 40 c 6.59998,0 12,5.400012 12,12.000002 v 40 c 0,6.6 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.4 -12,-12 v -40 c 0,-6.59999 5.38001,-12.000002 12,-12.000002 z M 182,180.94629 h 40 c 6.59998,0 12,5.40002 12,12 v 40 c 0,6.6 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.4 -12,-12 v -40 c 0,-6.59998 5.38001,-12 12,-12 z m 86,0 h 40 c 6.59998,0 12,5.40002 12,12 v 40 c 0,6.6 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.4 -12,-12 v -40 c 0,-6.59998 5.38001,-12 12,-12 z m 86,0 h 40 c 6.59998,0 12,5.40002 12,12 v 40 c 0,6.6 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.4 -12,-12 v -40 c 0,-6.59998 5.38001,-12 12,-12 z m -172,86 h 40 c 6.59998,0 12,5.40002 12,12 v 40 c 0,6.6 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.4 -12,-12 v -40 c 0,-6.59998 5.38001,-12 12,-12 z m 86,0 h 40 c 6.59998,0 12,5.40002 12,12 v 40 c 0,6.6 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.4 -12,-12 v -40 c 0,-6.59998 5.38001,-12 12,-12 z m 86,0.25 h 40 c 6.59998,0 12,5.40002 12,12 v 125.85547 c 0,6.59998 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.40002 -12,-12 V 279.19629 c 0,-6.59998 5.38001,-12 12,-12 z m -172,85.75 h 40 c 6.59998,0 12,5.40002 12,12 v 40 c 0,6.6 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.4 -12,-12 v -40 c 0,-6.59998 5.38001,-12 12,-12 z m 86,0 h 40 c 6.59998,0 12,5.40002 12,12 v 40 c 0,6.6 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.4 -12,-12 v -40 c 0,-6.59998 5.38001,-12 12,-12 z"></path></svg>           
+                  $NumLock_text
+                </div>
+                <span class="status"><span class="status-circle green"></span>$Ativado_text</span>
+                <div class="button-wrapper">
+                  <input id="n0" onclick="_run('./numlock.run')" type="checkbox" class="switch" style="top: 3px;" $checked_confnumlock>
+                </div>
+                </div>
+EOF
+else
+cat << EOF
+                  <div class="products">
+                  <svg viewBox="0 0 576 512"><path id="iconNumLock_text" fill="currentColor" d="M512 448H64c-35.35 0-64-28.65-64-64V128c0-35.35 28.65-64 64-64h448c35.35 0 64 28.65 64 64v256C576 419.3 547.3 448 512 448zM128 180v-40C128 133.4 122.6 128 116 128h-40C69.38 128 64 133.4 64 140v40C64 186.6 69.38 192 76 192h40C122.6 192 128 186.6 128 180zM224 180v-40C224 133.4 218.6 128 212 128h-40C165.4 128 160 133.4 160 140v40C160 186.6 165.4 192 172 192h40C218.6 192 224 186.6 224 180zM320 180v-40C320 133.4 314.6 128 308 128h-40C261.4 128 256 133.4 256 140v40C256 186.6 261.4 192 268 192h40C314.6 192 320 186.6 320 180zM416 180v-40C416 133.4 410.6 128 404 128h-40C357.4 128 352 133.4 352 140v40C352 186.6 357.4 192 364 192h40C410.6 192 416 186.6 416 180zM512 180v-40C512 133.4 506.6 128 500 128h-40C453.4 128 448 133.4 448 140v40C448 186.6 453.4 192 460 192h40C506.6 192 512 186.6 512 180zM128 276v-40C128 229.4 122.6 224 116 224h-40C69.38 224 64 229.4 64 236v40C64 282.6 69.38 288 76 288h40C122.6 288 128 282.6 128 276zM224 276v-40C224 229.4 218.6 224 212 224h-40C165.4 224 160 229.4 160 236v40C160 282.6 165.4 288 172 288h40C218.6 288 224 282.6 224 276zM320 276v-40C320 229.4 314.6 224 308 224h-40C261.4 224 256 229.4 256 236v40C256 282.6 261.4 288 268 288h40C314.6 288 320 282.6 320 276zM416 276v-40C416 229.4 410.6 224 404 224h-40C357.4 224 352 229.4 352 236v40C352 282.6 357.4 288 364 288h40C410.6 288 416 282.6 416 276zM512 276v-40C512 229.4 506.6 224 500 224h-40C453.4 224 448 229.4 448 236v40C448 282.6 453.4 288 460 288h40C506.6 288 512 282.6 512 276zM128 372v-40C128 325.4 122.6 320 116 320h-40C69.38 320 64 325.4 64 332v40C64 378.6 69.38 384 76 384h40C122.6 384 128 378.6 128 372zM416 372v-40C416 325.4 410.6 320 404 320h-232C165.4 320 160 325.4 160 332v40C160 378.6 165.4 384 172 384h232C410.6 384 416 378.6 416 372zM512 372v-40C512 325.4 506.6 320 500 320h-40C453.4 320 448 325.4 448 332v40C448 378.6 453.4 384 460 384h40C506.6 384 512 378.6 512 372z"></path></svg>
+                  $NumLock_text
+                </div>
+                <span class="status"><span class="status-circle gray"></span>$Desativado_text</span>
+                <div class="button-wrapper">
+                  <input id="n0" onclick="_run('./numlock.run')" type="checkbox" class="switch" style="top: 3px;" $checked_confnumlock>
+                </div>
+                </div>
+EOF
+
+fi
+
+if [ -z "$(grep Numlock=on /etc/sddm.conf)" ]; then
+
+cat << EOF
+                  <div class="products">
+                  <svg viewBox="0 0 576 512"><path id="iconNumLock_text" fill="currentColor" d="m 176.19921,47.475585 c -36.58489,0 -66.03905,29.452207 -66.03905,66.037115 v 284.97266 c 0,36.5849 29.45416,66.03906 66.03905,66.03906 h 223.60158 c 36.58489,0 66.03905,-29.45416 66.03905,-66.03906 V 113.5127 c 0,-36.584908 -29.45416,-66.037115 -66.03905,-66.037115 z M 182,94.946288 h 40 c 6.59998,0 12,5.400012 12,12.000002 v 40 c 0,6.6 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.4 -12,-12 v -40 c 0,-6.59999 5.38001,-12.000002 12,-12.000002 z m 86,0 h 40 c 6.59998,0 12,5.400012 12,12.000002 v 40 c 0,6.6 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.4 -12,-12 v -40 c 0,-6.59999 5.38001,-12.000002 12,-12.000002 z m 86,0 h 40 c 6.59998,0 12,5.400012 12,12.000002 v 40 c 0,6.6 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.4 -12,-12 v -40 c 0,-6.59999 5.38001,-12.000002 12,-12.000002 z M 182,180.94629 h 40 c 6.59998,0 12,5.40002 12,12 v 40 c 0,6.6 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.4 -12,-12 v -40 c 0,-6.59998 5.38001,-12 12,-12 z m 86,0 h 40 c 6.59998,0 12,5.40002 12,12 v 40 c 0,6.6 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.4 -12,-12 v -40 c 0,-6.59998 5.38001,-12 12,-12 z m 86,0 h 40 c 6.59998,0 12,5.40002 12,12 v 40 c 0,6.6 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.4 -12,-12 v -40 c 0,-6.59998 5.38001,-12 12,-12 z m -172,86 h 40 c 6.59998,0 12,5.40002 12,12 v 40 c 0,6.6 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.4 -12,-12 v -40 c 0,-6.59998 5.38001,-12 12,-12 z m 86,0 h 40 c 6.59998,0 12,5.40002 12,12 v 40 c 0,6.6 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.4 -12,-12 v -40 c 0,-6.59998 5.38001,-12 12,-12 z m 86,0.25 h 40 c 6.59998,0 12,5.40002 12,12 v 125.85547 c 0,6.59998 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.40002 -12,-12 V 279.19629 c 0,-6.59998 5.38001,-12 12,-12 z m -172,85.75 h 40 c 6.59998,0 12,5.40002 12,12 v 40 c 0,6.6 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.4 -12,-12 v -40 c 0,-6.59998 5.38001,-12 12,-12 z m 86,0 h 40 c 6.59998,0 12,5.40002 12,12 v 40 c 0,6.6 -5.40002,12 -12,12 h -40 c -6.61999,0 -12,-5.4 -12,-12 v -40 c 0,-6.59998 5.38001,-12 12,-12 z"></path></svg>           
+                  $NumLock_text
+                </div>
+                <span class="status"><span class="status-circle green"></span>$Ativado_text</span>
+                <div class="button-wrapper">
+                  <input id="n1" onclick="_run('./numlock.run')" type="checkbox" class="switch" style="top: 3px;" $checked_confnumlock>
+                </div>
+                </div>
+EOF
+else
+cat << EOF
+                  <div class="products">
+                  <svg viewBox="0 0 576 512"><path id="iconNumLock_text" fill="currentColor" d="M512 448H64c-35.35 0-64-28.65-64-64V128c0-35.35 28.65-64 64-64h448c35.35 0 64 28.65 64 64v256C576 419.3 547.3 448 512 448zM128 180v-40C128 133.4 122.6 128 116 128h-40C69.38 128 64 133.4 64 140v40C64 186.6 69.38 192 76 192h40C122.6 192 128 186.6 128 180zM224 180v-40C224 133.4 218.6 128 212 128h-40C165.4 128 160 133.4 160 140v40C160 186.6 165.4 192 172 192h40C218.6 192 224 186.6 224 180zM320 180v-40C320 133.4 314.6 128 308 128h-40C261.4 128 256 133.4 256 140v40C256 186.6 261.4 192 268 192h40C314.6 192 320 186.6 320 180zM416 180v-40C416 133.4 410.6 128 404 128h-40C357.4 128 352 133.4 352 140v40C352 186.6 357.4 192 364 192h40C410.6 192 416 186.6 416 180zM512 180v-40C512 133.4 506.6 128 500 128h-40C453.4 128 448 133.4 448 140v40C448 186.6 453.4 192 460 192h40C506.6 192 512 186.6 512 180zM128 276v-40C128 229.4 122.6 224 116 224h-40C69.38 224 64 229.4 64 236v40C64 282.6 69.38 288 76 288h40C122.6 288 128 282.6 128 276zM224 276v-40C224 229.4 218.6 224 212 224h-40C165.4 224 160 229.4 160 236v40C160 282.6 165.4 288 172 288h40C218.6 288 224 282.6 224 276zM320 276v-40C320 229.4 314.6 224 308 224h-40C261.4 224 256 229.4 256 236v40C256 282.6 261.4 288 268 288h40C314.6 288 320 282.6 320 276zM416 276v-40C416 229.4 410.6 224 404 224h-40C357.4 224 352 229.4 352 236v40C352 282.6 357.4 288 364 288h40C410.6 288 416 282.6 416 276zM512 276v-40C512 229.4 506.6 224 500 224h-40C453.4 224 448 229.4 448 236v40C448 282.6 453.4 288 460 288h40C506.6 288 512 282.6 512 276zM128 372v-40C128 325.4 122.6 320 116 320h-40C69.38 320 64 325.4 64 332v40C64 378.6 69.38 384 76 384h40C122.6 384 128 378.6 128 372zM416 372v-40C416 325.4 410.6 320 404 320h-232C165.4 320 160 325.4 160 332v40C160 378.6 165.4 384 172 384h232C410.6 384 416 378.6 416 372zM512 372v-40C512 325.4 506.6 320 500 320h-40C453.4 320 448 325.4 448 332v40C448 378.6 453.4 384 460 384h40C506.6 384 512 378.6 512 372z"></path></svg>
+                  $NumLock_text
+                </div>
+                <span class="status"><span class="status-circle gray"></span>$Desativado_text</span>
+                <div class="button-wrapper">
+                  <input id="n1" onclick="_run('./numlock.run')" type="checkbox" class="switch" style="top: 3px;" $checked_confnumlock>
+                </div>
+                </div>
+EOF
+
+
+
+
+
+
+
+cat << EOF         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<!-- partial -->
+<script src='/usr/share/bigbashview/bcc/materialize/js/jquery.js'></script><script  src="./script.js"></script>
+EOF
+if [ "$desktop_actual" = "classic" ]; then
+  echo '<script>$(document).ready(function(){$(`#linkClassic`).toggleClass("disabled-link");});</script>'
+fi
+
+if [ "$desktop_actual" = "new" ]; then
+  echo '<script>$(document).ready(function(){$(`#linkNew`).toggleClass("disabled-link");});</script>'
+fi
+
+if [ "$desktop_actual" = "modern" ]; then
+  echo '<script>$(document).ready(function(){$(`#linkModern`).toggleClass("disabled-link");});</script>'
+fi
+
+if [ "$desktop_actual" = "kunity" ]; then
+  echo '<script>$(document).ready(function(){$(`#linkKunity`).toggleClass("disabled-link");});</script>'
+fi
+
+if [ "$desktop_actual" = "nextg" ]; then
+  echo '<script>$(document).ready(function(){$(`#linkNextg`).toggleClass("disabled-link");});</script>'
+fi
+
+if [ "$desktop_actual" = "desk-x" ]; then
+  echo '<script>$(document).ready(function(){$(`#linkDesk-x`).toggleClass("disabled-link");});</script>'
+fi
+cat << EOF
+</body>
+</html>
+EOF
