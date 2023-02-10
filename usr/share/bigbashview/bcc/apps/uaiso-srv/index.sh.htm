@@ -31,7 +31,7 @@ cat << EOF
 EOF
 
 # Get body tag with color light or not
-/usr/share/bigbashview/bcc/shell/getbgcolor.sh
+/usr/share/bigbashview/bcc/apps/uaiso-srv/scripts/getbgcolor.sh
 
 cat << EOF
 <body>
@@ -108,7 +108,7 @@ service_name="Docker"
 SERVICE="docker"
 }
 
-lista_service=("apache" "ngnix" "mysql" "php8" "docker")
+lista_service=("apache" "ngnix" "mysql" "php" "docker")
 
 for i in ${lista_service[@]}; do $i;
 if [ -n "$(systemctl status $SERVICE | grep "Loaded:")" ];then

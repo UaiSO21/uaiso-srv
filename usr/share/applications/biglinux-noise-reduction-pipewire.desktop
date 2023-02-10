@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=UaiSo SRV
 Exec=uaiso-srv
-Icon=/usr/share/bigbashview/bcc/apps/icons/logo.svg
+Icon=/usr/share/bigbashview/bcc/apps/uaiso-srv/icons/logo-verde.svg
 StartupNotify=true
 Terminal=false
 Categories=System;
