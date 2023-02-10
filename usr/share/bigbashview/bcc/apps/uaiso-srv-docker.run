@@ -1,0 +1,13 @@
+#!/bin/bash
+#desligar service
+
+SERVICE=docker.service
+INPUT=$(LANG=C systemctl status $SERVICE | grep Active: | awk '{print $2}')
+
+if [ "$INPUT" =  "active" ]; then
+    pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY systemctl stop $SERVICE
+elif [ "$INPUT" =  "inactive" ]; then
+    pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY systemctl start $SERVICE
+fi
+
+xdotool key F5

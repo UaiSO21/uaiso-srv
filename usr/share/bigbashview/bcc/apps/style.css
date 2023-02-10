@@ -899,7 +899,7 @@ a.button:hover {
 }
 
 /* LOGO */
-.logo-biglinux {
+.logo-uaiso-srv {
     filter: var(--logo-big);
 }
 .logo {
@@ -2185,11 +2185,12 @@ li img {
 
 .status {
   margin-left: auto;
-  width: 200px;
+  margin-right: 10px;
+  width: auto;
   font-size: 15px;
   position: relative;
 }
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 220px) {
   .status {
     display: none;
   }

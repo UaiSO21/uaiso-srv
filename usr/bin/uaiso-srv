@@ -1,0 +1,9 @@
+#!/bin/bash
+
+#Translation
+export TEXTDOMAINDIR="/usr/share/locale"
+export TEXTDOMAIN=uaiso-srv
+
+cd /usr/share/bigbashview/bcc/apps/uaiso-srv/
+
+bigbashview -s 500x660 index.sh.htm -n $"UaiSo SRV" -i "logo.svg"
