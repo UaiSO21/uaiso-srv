@@ -616,7 +616,7 @@ input[type=radio] {
     display: inline-block;
     vertical-align: top;
     position: relative;
-    margin: 0;
+    margin: 10;
     cursor: pointer;
     border: 1px solid var(--bc, var(--border));
     background: var(--b, var(--background));
@@ -2092,6 +2092,9 @@ li img {
 .content-section-title {
   color: var(--content-title-color);
   margin-bottom: 14px;
+  align-items: right;
+  text-align: right;
+  margin-right: 35px;
 }
 .content-section ul {
     display: flex;

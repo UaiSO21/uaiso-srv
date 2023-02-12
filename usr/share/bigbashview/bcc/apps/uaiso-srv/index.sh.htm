@@ -77,11 +77,14 @@ cat << EOF
           </li>
         </ul>
     </div>
-      <div class="content-section-title">$Service</div>
+      <div class="content-section-title">Boot  |  Start</div>
 EOF
 
-### Start ###
+#lista_service=("apache" "ngnix" "mysql" "php" "docker" "systemd-swap")
+lista_service=$(grep "() {" index.sh.htm | awk '{print $1}' | sed '/lista_service=/d')
 
+
+### Inicio Editavel ###
 
 apache () {
 service_name="Apache"
@@ -108,15 +111,25 @@ service_name="Docker"
 SERVICE="docker"
 }
 
-lista_service=("apache" "ngnix" "mysql" "php" "docker")
+
+
+
+### Fim Editavel ###
 
 for i in ${lista_service[@]}; do $i;
 if [ -n "$(systemctl status $SERVICE | grep "Loaded:")" ];then
-	INPUT=$(LANG=C systemctl status $SERVICE | grep Active: | awk '{print $2}')
-	if [ "$INPUT" =  "active" ]; then
-	    checked_service="checked"
+	start=$(LANG=C systemctl status $SERVICE | grep Active: | awk '{print $2}')
+	if [ "$start" =  "active" ]; then
+	    checked_start="checked"
     else
-      checked_service=
+      checked_start=
+    fi
+    
+	enable=$(LANG=C systemctl status $SERVICE | grep Loaded: | awk '{print $4}' | sed 's/;//')
+	if [ "$enable" =  "enabled" ]; then
+	    checked_enable="checked"
+    else 
+	    checked_enable=
     fi
 
 cat << EOF
@@ -131,7 +144,8 @@ EOF
 cat << EOF
                   <span class="status"><span class="status-circle green"></span>$Ativado_text</span>
                   <div class="button-wrapper">
-                    <input id="n0" onclick="_run('./uaiso-srv-${SERVICE}.run')" type="checkbox" class="switch" style="top: 3px;" $checked_service>
+                    <input id="n0" onclick="_run('./uaiso-srv-${SERVICE}.run enable')" type="checkbox" class="switch" style="top: 3px;" $checked_enable>
+                    <input id="n0" onclick="_run('./uaiso-srv-${SERVICE}.run start')" type="checkbox" class="switch" style="top: 3px;" $checked_start>
                   </div>
                   </div>
                   </li>
@@ -140,7 +154,8 @@ EOF
 cat << EOF
                   <span class="status"><span class="status-circle gray"></span>$Desativado_text</span>
                   <div class="button-wrapper">
-                    <input id="n0" onclick="_run('./uaiso-srv-${SERVICE}.run')" type="checkbox" class="switch" style="top: 3px;" $checked_service>
+                    <input id="n0" onclick="_run('./uaiso-srv-${SERVICE}.run enable')" type="checkbox" class="switch" style="top: 3px;" $checked_enable>
+                    <input id="n0" onclick="_run('./uaiso-srv-${SERVICE}.run start')" type="checkbox" class="switch" style="top: 3px;" $checked_start>
                   </div>
                   </div>
                   </li>
