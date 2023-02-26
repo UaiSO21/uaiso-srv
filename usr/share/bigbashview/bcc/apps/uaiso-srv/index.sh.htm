@@ -80,15 +80,16 @@ cat << EOF
       <div class="content-section-title">Boot  |  Start</div>
 EOF
 
-#lista_service=("apache" "ngnix" "mysql" "php" "docker" "systemd-swap")
 lista_service=$(grep "() {" index.sh.htm | awk '{print $1}' | sed '/lista_service=/d')
 
 
 ### Inicio Editavel ###
+### Inicio Editavel ###
+### Inicio Editavel ###
 
 apache () {
 service_name="Apache"
-SERVICE="apache"
+SERVICE="httpd"
 }
 
 ngnix () {
@@ -111,9 +112,13 @@ service_name="Docker"
 SERVICE="docker"
 }
 
+ssh () {
+service_name="SSH"
+SERVICE="sshd"
+}
 
-
-
+### Fim Editavel ###
+### Fim Editavel ###
 ### Fim Editavel ###
 
 for i in ${lista_service[@]}; do $i;
