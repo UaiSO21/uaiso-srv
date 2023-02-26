@@ -1,7 +1,7 @@
 #!/bin/bash
 #desligar service
 
-SERVICE=httpd.service
+SERVICE=sshd.service
 start=$(LANG=C systemctl status $SERVICE | grep Active: | awk '{print $2}')
 enable=$(LANG=C systemctl status $SERVICE | grep Loaded: | awk '{print $4}' | sed 's/;//')
 

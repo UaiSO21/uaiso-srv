@@ -145,7 +145,7 @@ cat << EOF
                   $service_name
                   </div>
 EOF
-  if [ "$checked_service" = "checked" ]; then
+  if [ "$checked_start" = "checked" ]; then
 cat << EOF
                   <span class="status"><span class="status-circle green"></span>$Ativado_text</span>
                   <div class="button-wrapper">
@@ -180,29 +180,6 @@ cat << EOF
 <!-- partial -->
 <script src='/usr/share/bigbashview/bcc/materialize/js/jquery.js'></script><script  src="./script.js"></script>
 EOF
-if [ "$desktop_actual" = "classic" ]; then
-  echo '<script>$(document).ready(function(){$(`#linkClassic`).toggleClass("disabled-link");});</script>'
-fi
-
-if [ "$desktop_actual" = "new" ]; then
-  echo '<script>$(document).ready(function(){$(`#linkNew`).toggleClass("disabled-link");});</script>'
-fi
-
-if [ "$desktop_actual" = "modern" ]; then
-  echo '<script>$(document).ready(function(){$(`#linkModern`).toggleClass("disabled-link");});</script>'
-fi
-
-if [ "$desktop_actual" = "kunity" ]; then
-  echo '<script>$(document).ready(function(){$(`#linkKunity`).toggleClass("disabled-link");});</script>'
-fi
-
-if [ "$desktop_actual" = "nextg" ]; then
-  echo '<script>$(document).ready(function(){$(`#linkNextg`).toggleClass("disabled-link");});</script>'
-fi
-
-if [ "$desktop_actual" = "desk-x" ]; then
-  echo '<script>$(document).ready(function(){$(`#linkDesk-x`).toggleClass("disabled-link");});</script>'
-fi
 cat << EOF
 </body>
 </html>
